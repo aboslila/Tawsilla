@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { FadeInSection } from "@/components/fade-in-section";
 
 export const metadata: Metadata = {
   title: "اتصل بنا | توصيلة",
@@ -18,13 +19,15 @@ export default function ContactPage() {
     <>
       <Navbar />
       <main className="min-h-screen">
+        <FadeInSection>
         <section className="mx-auto max-w-4xl px-6 py-20 text-center">
           <h1 className="text-4xl font-extrabold md:text-5xl text-brand-yellow">اتصل بنا</h1>
           <p className="mt-4 text-lg text-foreground/70">
             نحن هنا للإجابة على أي استفسار
           </p>
         </section>
-
+        </FadeInSection>
+        <FadeInSection>
         <section className="mx-auto max-w-3xl px-6 pb-20">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {CONTACT_INFO.map((item) => {
@@ -47,6 +50,7 @@ export default function ContactPage() {
             })}
           </div>
         </section>
+        </FadeInSection>
       </main>
       <Footer />
     </>

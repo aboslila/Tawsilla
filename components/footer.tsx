@@ -7,7 +7,7 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="text-center md:text-start">
             <span className="text-xl font-bold text-brand-blue">توصيلة</span>
-            <p className="mt-2 text-sm text-foreground/60">
+            <p className="mt-2 text-sm text-brand-yellow font-bold">
               اللي فات حاجة واللي جاي توصيلة
             </p>
           </div>

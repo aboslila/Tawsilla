@@ -1,21 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDropdown } from "@/components/nav-dropdown";
 
-// Each top-level nav item is either a plain link or a dropdown.
-// Structuring it as data (not hardcoded JSX) means adding a new
-// menu item later is just adding one object here.
 const NAV_ITEMS = [
   {
     label: "خدماتنا",
     items: [
-      { href: "/services#food", label: "توصيل الطعام" },
-      { href: "/services#grocery", label: "توصيل البقالة" },
-      { href: "/services#parcels", label: "توصيل الطرود" },
+      { href: "/services/food", label: "توصيلة ايت" },
+      { href: "/services/grocery", label: "توصيلة ماركت" },
+      { href: "/services/shop", label: "توصيلة شوب" },
     ],
   },
   {
@@ -41,15 +39,22 @@ export function Navbar() {
     <header className="sticky top-0 z-50 bg-brand-blue">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold text-white">توصيلة</span>
+          {/* Fixed width/height matching the logo's square aspect ratio.
+              rounded-xl clips the corners slightly so the logo's own
+              rounded-square background blends cleanly into the navbar. */}
+          <Image
+            src="/logo.png"
+            alt="توصيلة"
+            width={40}
+            height={40}
+            className="rounded-xl"
+            priority
+          />
         </Link>
 
-        {/* Desktop dropdown nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_ITEMS.map((item) => {
-            return (
-              <NavDropdownOnBlue key={item.label} {...item} />
-            );
+            return <NavDropdownOnBlue key={item.label} {...item} />;
           })}
         </nav>
 
@@ -65,7 +70,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile: flat expandable list, simpler than desktop dropdowns */}
       {mobileOpen && (
         <nav className="flex flex-col gap-1 border-t border-white/10 px-6 py-4 md:hidden">
           {NAV_ITEMS.map((item) => {
@@ -95,10 +99,6 @@ export function Navbar() {
   );
 }
 
-// NavDropdown was designed for a light navbar (text-foreground/80,
-// bg-background panel). On our solid blue bar the trigger text needs
-// to be white instead - this thin wrapper overrides just that class
-// rather than forking the whole component.
 function NavDropdownOnBlue({
   label,
   items,
